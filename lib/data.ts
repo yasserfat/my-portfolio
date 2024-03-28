@@ -40,6 +40,14 @@ export const links = [
 
 export const experiencesData = [
   {
+    title: "Student Internship at iris tv production",
+    location: "setif, Algiers, Algeria",
+    description:
+      "At IRIS Company's TV production internship, I learned about TV screens (OLED, LED, LCD), motherboard components, and assembly processes, culminating in a comprehensive grasp of TV manufacturing.",
+    icon: React.createElement(LuGraduationCap),
+    date: " june 2022 to July 2022",
+  },
+  {
     title: "Student Internship at sonatrach",
     location: " sidi rezine, baraki, Algiers, Algeria",
     description:
@@ -53,7 +61,7 @@ export const experiencesData = [
     description:
       "Creating a captivating user interface that aligns seamlessly with the unique needs of the business by leveraging various technologies, including React and Next.js.",
     icon: React.createElement(FaReact),
-    date: "October 2022 -  January 2024",
+    date: "October 2022 to  January 2024",
   },
   {
     title: "Co-founder of lightup",
