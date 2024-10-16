@@ -8,7 +8,7 @@ import rmtdevImg from "@/public/rmtdev.png";
 import wordanalyticsImg from "@/public/wordanalytics.png";
 import sethandsons from "@/public/Screenshot 2024-03-28 140949.png";
 import aesHar from "@/public/Screenshot 2024-03-28 142753.png";
-import mublico from "@/public/Screenshot 2024-03-28 143844.png";
+import mublico from "@/public/image.png";
 import rm14 from "@/public/WhatsApp Image 2024-03-28 at 2.55.16 PM.jpeg";
 
 export const links = [
@@ -93,12 +93,12 @@ export const experiencesData = [
 
 export const projectsData = [
   {
-    title: "meubliko",
+    title: "AL-GSS",
     description:
-      "Developed a furniture  website with client-controlled admin dashboard and cart managment system.",
-    tags: ["React", "Firebase", "Tailwind", "React-router", "Redux-toolkit"],
+      "I built a responsive website for an oil and gas company using React.js and Tailwind CSS. Integrated EmailJS to enable smooth email communication through a contact form.",
+    tags: ["React",  "Tailwind", "Email js"],
     imageUrl: mublico,
-    link: "https://meubliko.vercel.app/",
+    link: "https://al-gss.com/",
   },
 
   {
