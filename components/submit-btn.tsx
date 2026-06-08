@@ -1,9 +1,15 @@
+"use client";
+
 import React from "react";
 import { FaPaperPlane } from "react-icons/fa";
 import { experimental_useFormStatus as useFormStatus } from "react-dom";
+import { useLanguage } from "@/context/language-context";
+import { translations } from "@/lib/translations";
 
 export default function SubmitBtn() {
   const { pending } = useFormStatus();
+  const { language } = useLanguage();
+  const label = translations[language].contact.submit;
 
   return (
     <button
@@ -15,8 +21,8 @@ export default function SubmitBtn() {
         <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
       ) : (
         <>
-          Submit{" "}
-          <FaPaperPlane className="text-xs opacity-70 transition-all group-hover:translate-x-1 group-hover:-translate-y-1" />{" "}
+          {label}{" "}
+          <FaPaperPlane className="text-xs opacity-70 transition-all group-hover:translate-x-1 group-hover:-translate-y-1" />
         </>
       )}
     </button>
