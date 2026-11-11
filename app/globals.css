@@ -2,14 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  --line-color: #e5e7eb;
+/*
+  Palette (RGB channels so Tailwind can apply opacity):
+  paper   #F2F4F6  cool page background
+  surface #FFFFFF  inputs, image backing
+  ink     #151922  text
+  muted   #5A6372  secondary text
+  rule    #D6DBE2  borders
+  detect  #D4006F  detection-box magenta, the only accent
+*/
+:root {
+  --paper: 242 244 246;
+  --surface: 255 255 255;
+  --ink: 21 25 34;
+  --muted: 90 99 114;
+  --rule: 214 219 226;
+  --detect: 212 0 111;
+  color-scheme: light;
 }
 
 html.dark {
-  --line-color: rgba(255, 255, 255, 0.2);
+  --paper: 16 19 26;
+  --surface: 24 28 37;
+  --ink: 231 234 240;
+  --muted: 154 163 178;
+  --rule: 42 48 60;
+  --detect: 255 79 163;
+  color-scheme: dark;
 }
 
-.borderBlack {
-  @apply border border-black/10;
+body {
+  @apply bg-paper text-ink font-sans antialiased;
+  font-feature-settings: "tnum" 0;
+}
+
+::selection {
+  background: rgb(var(--detect) / 0.2);
+}
+
+:focus-visible {
+  outline: 2px solid rgb(var(--detect));
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
 }

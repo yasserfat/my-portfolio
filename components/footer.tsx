@@ -9,11 +9,11 @@ export default function Footer() {
   const t = translations[language].footer;
 
   return (
-    <footer className="mb-10 px-4 text-center text-gray-500">
-      <small className="mb-2 block text-xs">&copy; {t.copyright}</small>
-      <p className="text-xs">
-        <span className="font-semibold">{t.aboutLabel}</span> {t.tech}
-      </p>
+    <footer className="border-t border-rule">
+      <div className="mx-auto flex max-w-page flex-col gap-1 px-4 py-8 text-sm text-muted sm:flex-row sm:justify-between sm:px-6">
+        <p>&copy; 2026 Yasser Fetouhi</p>
+        <p>{t.built}</p>
+      </div>
     </footer>
   );
 }

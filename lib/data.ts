@@ -1,121 +1,136 @@
-import React from "react";
-import { CgWorkAlt } from "react-icons/cg";
-import { FaReact } from "react-icons/fa";
-import { LuGraduationCap } from "react-icons/lu";
-import { GiTeacher } from "react-icons/gi";
-
 export const links = [
   { name: "Home", hash: "#home" },
-  { name: "About", hash: "#about" },
   { name: "Projects", hash: "#projects" },
-  { name: "Skills", hash: "#skills" },
-  { name: "Education", hash: "#education" },
   { name: "Experience", hash: "#experience" },
+  { name: "Education", hash: "#education" },
+  { name: "Skills", hash: "#skills" },
+  { name: "About", hash: "#about" },
   { name: "Contact", hash: "#contact" },
 ] as const;
 
-import corpcommentImg from "@/public/corpcomment.png";
-import rmtdevImg from "@/public/rmtdev.png";
-import wordanalyticsImg from "@/public/wordanalytics.png";
-import sethandsons from "@/public/Screenshot 2024-03-28 140949.png";
-import aesHar from "@/public/Screenshot 2024-03-28 142753.png";
-import mublico from "@/public/image.png";
-import rm14 from "@/public/WhatsApp Image 2024-03-28 at 2.55.16 PM.jpeg";
+export const CONTACT_EMAIL = "yasserfetouhi@gmail.com";
+export const CV_PATH = "/Yasser_Fetouhi_CV_General.pdf";
+export const GITHUB_URL = "https://github.com/yasserfat";
+export const LINKEDIN_URL = "https://www.linkedin.com/in/yasser-fetouhi-b555b5235/";
 
-export const projectsData = [
-  {
-    title: "AL-GSS",
-    description: "Responsive website for an oil and gas company using React.js and Tailwind CSS.",
-    tags: ["React", "Tailwind", "Email js"],
-    imageUrl: mublico,
-    link: "https://al-gss.com/",
-  },
-  {
-    title: "Seth & Sons Estate",
-    description: "Estate website with client-controlled admin dashboard.",
-    tags: ["React", "Firebase", "Tailwind", "React-router", "Redux-toolkit"],
-    imageUrl: sethandsons,
-    link: "https://sethandsons-vert.vercel.app/",
-  },
-  {
-    title: "Portfolio Website",
-    description: "Portfolio website showcasing skills, achievements, and experience.",
-    tags: ["HTML", "CSS", "JavaScript"],
-    imageUrl: aesHar,
-    link: "https://yasserfet.github.io/abdessamie.com/",
-  },
-] as const;
+export type ProjectId =
+  | "saferoad"
+  | "docPipeline"
+  | "agon"
+  | "teraHertz"
+  | "devflows"
+  | "tennisEveil"
+  | "thoShipping"
+  | "solarEms"
+  | "mazeRobot"
+  | "debtIot";
 
-export type ExperienceItem = {
-  title: string;
-  location: string;
-  description: string;
-  bullets?: string[];
-  icon: React.ReactElement;
-  date: string;
+export type GroupId = "vision" | "web" | "embedded";
+
+export type ProjectMeta = {
+  id: ProjectId;
+  stack: string[];
+  link?: string;
+  linkKind?: "code" | "site";
 };
 
-export const experiencesData: ExperienceItem[] = [
+export const featuredProject: ProjectMeta = {
+  id: "saferoad",
+  stack: ["Python", "PyTorch", "YOLOv8", "OpenCV"],
+};
+
+export const projectGroups: { id: GroupId; projects: ProjectMeta[] }[] = [
   {
-    title: "Front-End Developer at DevFlows",
-    location: "Remote",
-    description:
-      "Working at DevFlows — a low-code/AI European agency — my role involves:",
-    bullets: [
-      "Building full stack applications with Bubble.io",
-      "Developing polished user interfaces with close attention to detail using low-code technologies (WeWeb, Webflow) and full-code frameworks (React / Next.js)",
-      "Building custom WeWeb components on top of Vue.js",
-      "Dealing with legacy projects and legacy code",
-      "Working closely with backend developers",
-      "Understanding client needs and translating them into technical solutions",
-      "Optimizing performance across projects",
-      "Collaborating closely with designers",
-      "Building automations with scripts or tools like Make and Airtable",
-      "Working with SEO specialists to optimize search engine performance",
-      "Content writing",
-      "Managing client support and feedback",
+    id: "vision",
+    projects: [
+      {
+        id: "docPipeline",
+        stack: ["Python", "FastAPI", "Vision LLM", "OpenCV", "LaTeX"],
+        link: "https://github.com/yasserfat/scaned-exams-to-letex-and-qr-code-for-solution",
+        linkKind: "code",
+      },
     ],
-    icon: React.createElement(CgWorkAlt),
-    date: "Feb 2024 – present",
   },
   {
-    title: "Instructor & Head of Research Unit — Inelectronics Student Club",
-    location: "Boumerdes, Algeria",
-    description:
-      "Managing and instructing a web development workshop for 45+ participants over 12 sessions, focusing on HTML, CSS, and JavaScript. Mentored participants through a month-long project phase, followed by evaluation of winners.",
-    icon: React.createElement(GiTeacher),
-    date: "November 2022 – present",
+    id: "web",
+    projects: [
+      {
+        id: "agon",
+        stack: ["WeWeb", "Xano", "n8n", "LLMs"],
+        link: "https://github.com/yasserfat/Agon-AI-Powered-Personalized-Sports-Nutrition-Platform",
+        linkKind: "code",
+      },
+      {
+        id: "teraHertz",
+        stack: ["Webflow", "Make"],
+        link: "https://www.tera-hertz.fr/",
+        linkKind: "site",
+      },
+      {
+        id: "devflows",
+        stack: ["Webflow", "SEO"],
+        link: "https://www.devflows.eu/",
+        linkKind: "site",
+      },
+      {
+        id: "tennisEveil",
+        stack: ["Webflow"],
+        link: "https://tenniseveil.com/",
+        linkKind: "site",
+      },
+      {
+        id: "thoShipping",
+        stack: ["Webflow"],
+        link: "https://www.thoshipping.com/",
+        linkKind: "site",
+      },
+    ],
   },
   {
-    title: "Co-Founder of LightUp",
-    location: "Boumerdes, Algeria",
-    description:
-      "Co-founder and CTO in the INJAZ EL DJAZAIR Entrepreneurship Program. Led a venture providing sustainable portable power solutions. Gained extensive expertise in business planning, modeling, strategic marketing, and financial projections.",
-    icon: React.createElement(CgWorkAlt),
-    date: "November 2022 – June 2023",
-  },
-  {
-    title: "Freelancer",
-    location: "Remote",
-    description:
-      "Creating captivating user interfaces aligned with business needs, leveraging React and Next.js to deliver modern, performant web experiences.",
-    icon: React.createElement(FaReact),
-    date: "October 2022 – January 2024",
-  },
-  {
-    title: "Student Internship at Sonatrach",
-    location: "Sidi Rezine, Baraki, Algiers, Algeria",
-    description:
-      "Learned about company structure and activities, turbine principles and electricity generation in Algeria, hydrocarbons transportation (gas and petroleum), and reporting.",
-    icon: React.createElement(LuGraduationCap),
-    date: "July 2022 – August 2022",
-  },
-  {
-    title: "Student Internship at IRIS TV Production",
-    location: "Sétif, Algeria",
-    description:
-      "Learned about TV screens (OLED, LED, LCD), motherboard components, and assembly processes, culminating in a comprehensive understanding of TV manufacturing.",
-    icon: React.createElement(LuGraduationCap),
-    date: "June 2022 – July 2022",
+    id: "embedded",
+    projects: [
+      {
+        id: "solarEms",
+        stack: ["ESP32", "C++", "Firebase", "JavaScript"],
+        link: "https://github.com/yasserfat/Solar-EMS-IoT-Monitoring-System",
+        linkKind: "code",
+      },
+      {
+        id: "mazeRobot",
+        stack: ["ESP32", "C++", "PID control", "IR sensors"],
+        link: "https://github.com/yasserfat/Maze-solving-robot",
+        linkKind: "code",
+      },
+      {
+        id: "debtIot",
+        stack: ["ESP32", "C++", "IoT"],
+        link: "https://github.com/yasserfat/IOT-system-for-debt-payment",
+        linkKind: "code",
+      },
+    ],
   },
 ];
+
+export const skillGroups: { id: "ai" | "web" | "automation" | "embedded"; items: string[] }[] = [
+  {
+    id: "ai",
+    items: ["Python", "PyTorch", "YOLOv8", "OpenCV", "scikit-learn", "pandas", "NumPy", "Matplotlib", "MATLAB", "LLM APIs"],
+  },
+  {
+    id: "web",
+    items: ["React", "Next.js", "TypeScript", "JavaScript", "HTML/CSS", "FastAPI", "Node.js", "Webflow", "WordPress", "WeWeb"],
+  },
+  {
+    id: "automation",
+    items: ["SQL", "PostgreSQL", "Supabase", "Firebase", "REST APIs", "n8n", "Make", "Git"],
+  },
+  {
+    id: "embedded",
+    items: ["ESP32", "C/C++", "Arduino", "IoT", "PID control"],
+  },
+];
+
+export const photos = {
+  hiking: ["/hiking1.png", "/hiking2.png", "/hiking4.png"],
+  teaching: ["/vol1.jpeg", "/vol2.jpeg", "/vol3.jpeg"],
+};

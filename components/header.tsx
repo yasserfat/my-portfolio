@@ -1,75 +1,125 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
-import { links } from "@/lib/data";
 import Link from "next/link";
 import clsx from "clsx";
+import { BsMoon, BsSun } from "react-icons/bs";
+import { links } from "@/lib/data";
 import { useActiveSectionContext } from "@/context/active-section-context";
-import { useLanguage } from "@/context/language-context";
+import { useLanguage, type Language } from "@/context/language-context";
+import { useTheme } from "@/context/theme-context";
 import { translations } from "@/lib/translations";
 import type { SectionName } from "@/lib/types";
 
+const LANGS: Language[] = ["en", "de", "fr"];
+
 export default function Header() {
-  const { activeSection, setActiveSection, setTimeOfLastClick } =
-    useActiveSectionContext();
-  const { language } = useLanguage();
-  const t = translations[language].nav;
+  const { activeSection, setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
+  const { language, setLanguage } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
+  const t = translations[language];
+
+  const go = (name: SectionName) => {
+    setActiveSection(name);
+    setTimeOfLastClick(Date.now());
+  };
 
   return (
-    <header className="z-[999] relative">
-      {/* Mobile full-width background strip (hidden on sm+) */}
-      <motion.div
-        className="sm:hidden fixed top-0 left-0 h-[4.5rem] w-full border-b border-white/40 bg-white/80 shadow-lg shadow-black/[0.03] backdrop-blur-[0.5rem] dark:bg-gray-950 dark:border-black/40 dark:bg-opacity-75"
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-      />
+    <header className="sticky top-0 z-50 border-b border-rule bg-paper/90 backdrop-blur">
+      <div className="mx-auto flex h-14 max-w-page items-center justify-between gap-4 px-4 sm:px-6">
+        <Link
+          href="#home"
+          onClick={() => go("Home")}
+          className="font-display text-[1.05rem] font-bold tracking-tight"
+        >
+          Yasser Fetouhi
+        </Link>
 
-      {/* Nav — auto-sizing pill on sm+, centered strip on mobile */}
-      <motion.nav
-        className={clsx(
-          "fixed top-[0.15rem] left-1/2 h-12 -translate-x-1/2 flex items-center py-2",
-          "sm:top-6 sm:h-[3.25rem] sm:py-1 sm:px-2",
-          "sm:rounded-full sm:border sm:border-white/40 sm:bg-white/80",
-          "sm:shadow-lg sm:shadow-black/[0.03] sm:backdrop-blur-[0.5rem]",
-          "dark:sm:bg-gray-950 dark:sm:border-black/40 dark:sm:bg-opacity-75"
-        )}
-        initial={{ y: -100, x: "-50%", opacity: 0 }}
-        animate={{ y: 0, x: "-50%", opacity: 1 }}
-      >
-        <ul className="flex w-[22rem] flex-wrap items-center justify-center gap-y-1 text-[0.9rem] font-medium text-gray-500 sm:w-auto sm:flex-nowrap sm:gap-0">
-          {links.map((link) => (
-            <motion.li
-              className="h-3/4 flex items-center justify-center relative"
-              key={link.hash}
-              initial={{ y: -100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-            >
-              <Link
+        <nav aria-label="Sections" className="hidden lg:block">
+          <NavList activeSection={activeSection} labels={t.nav} onNavigate={go} />
+        </nav>
+
+        <div className="flex items-center gap-1">
+          <div
+            role="group"
+            aria-label={t.header.language}
+            className="flex items-center rounded-md border border-rule p-0.5"
+          >
+            {LANGS.map((code) => (
+              <button
+                key={code}
+                type="button"
+                onClick={() => setLanguage(code)}
+                aria-pressed={language === code}
+                lang={code}
                 className={clsx(
-                  "flex w-full items-center justify-center whitespace-nowrap px-2.5 py-3 text-[0.82rem] hover:text-gray-950 transition dark:text-gray-500 dark:hover:text-gray-300",
-                  { "text-gray-950 dark:text-gray-200": activeSection === link.name }
+                  "rounded-[4px] px-2 py-1 text-xs font-medium uppercase transition-colors",
+                  language === code ? "bg-ink text-paper" : "text-muted hover:text-ink"
                 )}
-                href={link.hash}
-                onClick={() => {
-                  setActiveSection(link.name as SectionName);
-                  setTimeOfLastClick(Date.now());
-                }}
               >
-                {t[link.name as keyof typeof t]}
+                {code}
+              </button>
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={theme === "light" ? t.header.toDark : t.header.toLight}
+            className="flex h-8 w-8 items-center justify-center rounded-md text-muted transition-colors hover:text-ink"
+          >
+            {theme === "light" ? <BsMoon /> : <BsSun />}
+          </button>
+        </div>
+      </div>
 
-                {link.name === activeSection && (
-                  <motion.span
-                    className="bg-gray-100 rounded-full absolute inset-0 -z-10 dark:bg-gray-800"
-                    layoutId="activeSection"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-              </Link>
-            </motion.li>
-          ))}
-        </ul>
-      </motion.nav>
+      {/* Small screens: the section links scroll sideways under the name */}
+      <nav aria-label="Sections" className="overflow-x-auto border-t border-rule [scrollbar-width:none] lg:hidden [&::-webkit-scrollbar]:hidden">
+        <div className="mx-auto max-w-page px-2 sm:px-4">
+          <NavList activeSection={activeSection} labels={t.nav} onNavigate={go} />
+        </div>
+      </nav>
     </header>
+  );
+}
+
+function NavList({
+  activeSection,
+  labels,
+  onNavigate,
+}: {
+  activeSection: SectionName;
+  labels: Record<SectionName, string>;
+  onNavigate: (name: SectionName) => void;
+}) {
+  return (
+    <ul className="flex items-center">
+      {links
+        .filter((link) => link.name !== "Home")
+        .map((link) => {
+          const active = activeSection === link.name;
+          return (
+            <li key={link.hash}>
+              <Link
+                href={link.hash}
+                onClick={() => onNavigate(link.name)}
+                aria-current={active ? "true" : undefined}
+                className={clsx(
+                  "relative block whitespace-nowrap px-2.5 py-3 text-sm transition-colors lg:py-2",
+                  active ? "text-ink" : "text-muted hover:text-ink"
+                )}
+              >
+                {labels[link.name]}
+                <span
+                  aria-hidden
+                  className={clsx(
+                    "absolute inset-x-2.5 bottom-1 h-0.5 bg-detect transition-opacity lg:bottom-0",
+                    active ? "opacity-100" : "opacity-0"
+                  )}
+                />
+              </Link>
+            </li>
+          );
+        })}
+    </ul>
   );
 }

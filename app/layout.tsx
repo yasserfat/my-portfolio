@@ -1,19 +1,29 @@
 import Header from "@/components/header";
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { IBM_Plex_Sans, Schibsted_Grotesk } from "next/font/google";
 import ActiveSectionContextProvider from "@/context/active-section-context";
 import { LanguageContextProvider } from "@/context/language-context";
 import Footer from "@/components/footer";
-import ThemeSwitch from "@/components/theme-switch";
-import LanguageSwitch from "@/components/language-switch";
 import ThemeContextProvider from "@/context/theme-context";
 import { Toaster } from "react-hot-toast";
 
-const inter = Inter({ subsets: ["latin"] });
+const body = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-body",
+});
+
+const display = Schibsted_Grotesk({
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
+  variable: "--font-display",
+  adjustFontFallback: false,
+});
 
 export const metadata = {
-  title: "Fetoui yasser | Personal Portfolio",
-  description: "yasser is a front-end developer with one year of experience.",
+  title: "Yasser Fetouhi | Computer vision & web development",
+  description:
+    "Yasser Fetouhi is a Master's student in Applied Image and Signal Processing in Salzburg, building computer vision models and web applications.",
 };
 
 export default function RootLayout({
@@ -22,23 +32,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="!scroll-smooth">
-      <body
-        className={`${inter.className} bg-gray-50 text-gray-950 relative pt-28 sm:pt-36 dark:bg-gray-900 dark:text-gray-50 dark:text-opacity-90`}
-      >
-        <div className="bg-[#fbe2e3] absolute top-[-6rem] -z-10 right-[11rem] h-[31.25rem] w-[31.25rem] rounded-full blur-[10rem] sm:w-[68.75rem] dark:bg-[#946263]"></div>
-        <div className="bg-[#dbd7fb] absolute top-[-1rem] -z-10 left-[-35rem] h-[31.25rem] w-[50rem] rounded-full blur-[10rem] sm:w-[68.75rem] md:left-[-33rem] lg:left-[-28rem] xl:left-[-15rem] 2xl:left-[-5rem] dark:bg-[#676394]"></div>
-
+    <html lang="en" className={`!scroll-smooth ${body.variable} ${display.variable}`}>
+      <body>
         <ThemeContextProvider>
           <LanguageContextProvider>
             <ActiveSectionContextProvider>
               <Header />
               {children}
               <Footer />
-
-              <Toaster position="top-right" />
-              <ThemeSwitch />
-              <LanguageSwitch />
+              <Toaster position="bottom-center" />
             </ActiveSectionContextProvider>
           </LanguageContextProvider>
         </ThemeContextProvider>

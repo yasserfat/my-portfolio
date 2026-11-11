@@ -1,75 +1,39 @@
 "use client";
 
 import React from "react";
-import SectionHeading from "./section-heading";
-import {
-  VerticalTimeline,
-  VerticalTimelineElement,
-} from "react-vertical-timeline-component";
-import "react-vertical-timeline-component/style.min.css";
-import { experiencesData } from "@/lib/data";
+import Section from "./section";
+import Timeline from "./timeline";
 import { useSectionInView } from "@/lib/hooks";
-import { useTheme } from "@/context/theme-context";
 import { useLanguage } from "@/context/language-context";
 import { translations } from "@/lib/translations";
 
 export default function Experience() {
-  const { ref } = useSectionInView("Experience");
-  const { theme } = useTheme();
+  const { ref } = useSectionInView("Experience", 0.3);
   const { language } = useLanguage();
   const t = translations[language].experience;
 
   return (
-    <section id="experience" ref={ref} className="scroll-mt-28 mb-28 sm:mb-40">
-      <SectionHeading>{t.heading}</SectionHeading>
-      <VerticalTimeline lineColor="">
-        {experiencesData.map((item, index) => (
-          <React.Fragment key={index}>
-            <VerticalTimelineElement
-              contentStyle={{
-                background:
-                  theme === "light" ? "#f3f4f6" : "rgba(255, 255, 255, 0.05)",
-                boxShadow: "none",
-                border: "1px solid rgba(0, 0, 0, 0.05)",
-                textAlign: "left",
-                padding: "1.3rem 2rem",
-              }}
-              contentArrowStyle={{
-                borderRight:
-                  theme === "light"
-                    ? "0.4rem solid #9ca3af"
-                    : "0.4rem solid rgba(255, 255, 255, 0.5)",
-              }}
-              date={item.date}
-              icon={item.icon}
-              iconStyle={{
-                background:
-                  theme === "light" ? "white" : "rgba(255, 255, 255, 0.15)",
-                fontSize: "1.5rem",
-              }}
-            >
-              <h3 className="font-semibold capitalize">{item.title}</h3>
-              <p className="font-normal !mt-0">{item.location}</p>
-              <p className="!mt-1 !font-normal text-gray-700 dark:text-white/75">
-                {item.description}
-              </p>
-              {item.bullets && item.bullets.length > 0 && (
-                <ul className="!mt-2 space-y-1 list-none">
-                  {item.bullets.map((bullet, bi) => (
-                    <li
-                      key={bi}
-                      className="flex items-start gap-2 text-sm text-gray-700 dark:text-white/75"
-                    >
-                      <span className="mt-[3px] h-1.5 w-1.5 shrink-0 rounded-full bg-violet-500" />
-                      {bullet}
-                    </li>
+    <Section id="experience" title={t.heading} inViewRef={ref}>
+      <Timeline
+        items={t.items.map((item) => ({
+          key: item.role + item.date,
+          date: item.date,
+          title: item.role,
+          subtitle: `${item.org}, ${item.place}`,
+          body: (
+            <>
+              {item.text ? <p>{item.text}</p> : null}
+              {item.bullets.length > 0 ? (
+                <ul className="list-disc space-y-1.5 pl-5 marker:text-muted">
+                  {item.bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
                   ))}
                 </ul>
-              )}
-            </VerticalTimelineElement>
-          </React.Fragment>
-        ))}
-      </VerticalTimeline>
-    </section>
+              ) : null}
+            </>
+          ),
+        }))}
+      />
+    </Section>
   );
 }

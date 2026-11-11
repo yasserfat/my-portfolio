@@ -1,70 +1,75 @@
 "use client";
 
 import React from "react";
-import SectionHeading from "./section-heading";
-import { motion } from "framer-motion";
+import toast from "react-hot-toast";
+import Section from "./section";
+import SubmitBtn from "./submit-btn";
 import { useSectionInView } from "@/lib/hooks";
 import { sendEmail } from "@/actions/sendEmail";
-import SubmitBtn from "./submit-btn";
-import toast from "react-hot-toast";
 import { useLanguage } from "@/context/language-context";
 import { translations } from "@/lib/translations";
+import { CONTACT_EMAIL } from "@/lib/data";
+
+const fieldClass =
+  "w-full rounded-md border border-rule bg-surface px-3.5 py-3 text-[15px] text-ink placeholder:text-muted/70 transition-colors focus:border-ink focus:outline-none";
 
 export default function Contact() {
-  const { ref } = useSectionInView("Contact");
+  const { ref } = useSectionInView("Contact", 0.5);
   const { language } = useLanguage();
   const t = translations[language].contact;
 
   return (
-    <motion.section
-      id="contact"
-      ref={ref}
-      className="mb-20 sm:mb-28 w-[min(100%,38rem)] text-center"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-      viewport={{ once: true }}
-    >
-      <SectionHeading>{t.heading}</SectionHeading>
-
-      <p className="text-gray-700 -mt-6 dark:text-white/80">
-        {t.subtext}{" "}
-        <a className="underline" href="mailto:yasserfetouhi@gmail.com">
-          yasserfetouhi@gmail.com
-        </a>{" "}
-        {t.subtextOr}
-      </p>
+    <Section id="contact" title={t.heading} inViewRef={ref}>
+      <p className="max-w-[34rem] leading-relaxed text-muted">{t.text}</p>
+      <a
+        href={`mailto:${CONTACT_EMAIL}`}
+        className="mt-4 inline-block break-all font-display text-2xl font-bold tracking-tight underline decoration-detect decoration-2 underline-offset-[6px] transition-colors hover:text-detect sm:text-3xl"
+      >
+        {CONTACT_EMAIL}
+      </a>
 
       <form
-        className="mt-10 flex flex-col dark:text-black"
+        className="mt-10 max-w-[34rem] space-y-4"
         action={async (formData) => {
-          const { data, error } = await sendEmail(formData);
-
+          const { error } = await sendEmail(formData);
           if (error) {
             toast.error(error);
             return;
           }
-
           toast.success(t.success);
         }}
       >
-        <input
-          className="h-14 px-4 rounded-lg borderBlack dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
-          name="senderEmail"
-          type="email"
-          required
-          maxLength={500}
-          placeholder={t.emailPlaceholder}
-        />
-        <textarea
-          className="h-52 my-3 rounded-lg borderBlack p-4 dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
-          name="message"
-          placeholder={t.messagePlaceholder}
-          required
-          maxLength={5000}
-        />
+        <div>
+          <label htmlFor="senderEmail" className="mb-1.5 block text-sm font-medium">
+            {t.emailLabel}
+          </label>
+          <input
+            id="senderEmail"
+            name="senderEmail"
+            type="email"
+            required
+            maxLength={500}
+            autoComplete="email"
+            placeholder={t.emailPlaceholder}
+            className={fieldClass}
+          />
+        </div>
+        <div>
+          <label htmlFor="message" className="mb-1.5 block text-sm font-medium">
+            {t.messageLabel}
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            maxLength={5000}
+            rows={6}
+            placeholder={t.messagePlaceholder}
+            className={`${fieldClass} resize-y`}
+          />
+        </div>
         <SubmitBtn />
       </form>
-    </motion.section>
+    </Section>
   );
 }
