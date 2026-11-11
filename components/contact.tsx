@@ -29,8 +29,8 @@ export default function Contact() {
 
       <p className="text-gray-700 -mt-6 dark:text-white/80">
         {t.subtext}{" "}
-        <a className="underline" href="mailto:yasserfat9@gmail.com">
-          yasserfat9@gmail.com
+        <a className="underline" href="mailto:yasserfetouhi@gmail.com">
+          yasserfetouhi@gmail.com
         </a>{" "}
         {t.subtextOr}
       </p>

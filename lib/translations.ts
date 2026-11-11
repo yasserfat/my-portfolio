@@ -7,6 +7,7 @@ export const translations = {
       About: "About",
       Projects: "Projects",
       Skills: "Skills",
+      Education: "Education",
       Experience: "Experience",
       Contact: "Contact",
     },
@@ -64,7 +65,7 @@ export const translations = {
         {
           emoji: "📚",
           title: "Currently",
-          content: "Pursuing a Master's in Computer Engineering, going deeper into intelligent, connected systems.",
+          content: "Joint Master's in Applied Image and Signal Processing at FH Salzburg & University of Salzburg, Austria.",
           gradient: "from-amber-500/10 to-orange-500/5 border-amber-500/20 dark:from-amber-500/15 dark:border-amber-500/25",
           accent: "text-amber-600 dark:text-amber-400",
         },
@@ -73,10 +74,20 @@ export const translations = {
       langItems: [
         { lang: "English", level: "C1", note: "IELTS certified", flag: "🇬🇧" },
         { lang: "French", level: "B2", note: "", flag: "🇫🇷" },
+        { lang: "German", level: "A2", note: "Currently taking a course", flag: "🇩🇪" },
         { lang: "Arabic", level: "Native", note: "", flag: "🇩🇿" },
       ],
     },
     skills: { heading: "My skills" },
+    education: {
+      heading: "My education",
+      present: "Present",
+      items: [
+        { degree: "Joint Master's in Applied Image and Signal Processing", school: "FH Salzburg & University of Salzburg", location: "Salzburg, Austria", date: "Sep 2026 – Present", focus: "Computer vision, machine learning, image and signal processing, data analysis.", current: true },
+        { degree: "Master's in Computer Engineering", school: "IGEE (ex-INELEC)", location: "Boumerdes, Algeria", date: "Sep 2024 – Jun 2026", focus: "", current: false },
+        { degree: "Bachelor's in Electrical and Electronics Engineering", school: "IGEE (ex-INELEC)", location: "Boumerdes, Algeria", date: "Sep 2021 – Jun 2024", focus: "", current: false },
+      ],
+    },
     experience: { heading: "My experience" },
     projects: {
       heading: "My projects",
@@ -117,6 +128,7 @@ export const translations = {
       About: "Über mich",
       Projects: "Projekte",
       Skills: "Fähigkeiten",
+      Education: "Ausbildung",
       Experience: "Erfahrung",
       Contact: "Kontakt",
     },
@@ -174,7 +186,7 @@ export const translations = {
         {
           emoji: "📚",
           title: "Aktuell",
-          content: "Master-Studium in Computertechnik, Vertiefung in intelligente, vernetzte Systeme.",
+          content: "Joint Master in Applied Image and Signal Processing an der FH Salzburg & Universität Salzburg, Österreich.",
           gradient: "from-amber-500/10 to-orange-500/5 border-amber-500/20 dark:from-amber-500/15 dark:border-amber-500/25",
           accent: "text-amber-600 dark:text-amber-400",
         },
@@ -183,10 +195,20 @@ export const translations = {
       langItems: [
         { lang: "Englisch", level: "C1", note: "IELTS zertifiziert", flag: "🇬🇧" },
         { lang: "Französisch", level: "B2", note: "", flag: "🇫🇷" },
+        { lang: "Deutsch", level: "A2", note: "Kurs läuft", flag: "🇩🇪" },
         { lang: "Arabisch", level: "Muttersprache", note: "", flag: "🇩🇿" },
       ],
     },
     skills: { heading: "Meine Fähigkeiten" },
+    education: {
+      heading: "Meine Ausbildung",
+      present: "Aktuell",
+      items: [
+        { degree: "Joint Master in Applied Image and Signal Processing", school: "FH Salzburg & Universität Salzburg", location: "Salzburg, Österreich", date: "Sep 2026 – heute", focus: "Computer Vision, Machine Learning, Bild- und Signalverarbeitung, Datenanalyse.", current: true },
+        { degree: "Master in Computertechnik", school: "IGEE (ex-INELEC)", location: "Boumerdes, Algerien", date: "Sep 2024 – Jun 2026", focus: "", current: false },
+        { degree: "Bachelor in Elektrotechnik und Elektronik", school: "IGEE (ex-INELEC)", location: "Boumerdes, Algerien", date: "Sep 2021 – Jun 2024", focus: "", current: false },
+      ],
+    },
     experience: { heading: "Meine Erfahrung" },
     projects: {
       heading: "Meine Projekte",
@@ -227,6 +249,7 @@ export const translations = {
       About: "À propos",
       Projects: "Projets",
       Skills: "Compétences",
+      Education: "Formation",
       Experience: "Expérience",
       Contact: "Contact",
     },
@@ -284,7 +307,7 @@ export const translations = {
         {
           emoji: "📚",
           title: "Actuellement",
-          content: "En Master de génie informatique, approfondissant les systèmes intelligents et connectés.",
+          content: "Master conjoint en traitement d'images et du signal appliqué à la FH Salzburg & Université de Salzbourg, Autriche.",
           gradient: "from-amber-500/10 to-orange-500/5 border-amber-500/20 dark:from-amber-500/15 dark:border-amber-500/25",
           accent: "text-amber-600 dark:text-amber-400",
         },
@@ -293,10 +316,20 @@ export const translations = {
       langItems: [
         { lang: "Anglais", level: "C1", note: "Certifié IELTS", flag: "🇬🇧" },
         { lang: "Français", level: "B2", note: "", flag: "🇫🇷" },
+        { lang: "Allemand", level: "A2", note: "Cours en cours", flag: "🇩🇪" },
         { lang: "Arabe", level: "Langue natale", note: "", flag: "🇩🇿" },
       ],
     },
     skills: { heading: "Mes compétences" },
+    education: {
+      heading: "Ma formation",
+      present: "En cours",
+      items: [
+        { degree: "Master conjoint en traitement d'images et du signal appliqué", school: "FH Salzburg & Université de Salzbourg", location: "Salzbourg, Autriche", date: "Sep 2026 – Aujourd'hui", focus: "Vision par ordinateur, apprentissage automatique, traitement d'images et du signal, analyse de données.", current: true },
+        { degree: "Master en génie informatique", school: "IGEE (ex-INELEC)", location: "Boumerdes, Algérie", date: "Sep 2024 – Juin 2026", focus: "", current: false },
+        { degree: "Licence en génie électrique et électronique", school: "IGEE (ex-INELEC)", location: "Boumerdes, Algérie", date: "Sep 2021 – Juin 2024", focus: "", current: false },
+      ],
+    },
     experience: { heading: "Mon expérience" },
     projects: {
       heading: "Mes projets",

@@ -176,8 +176,8 @@ export default function Intro() {
 
         <a
           className="group bg-white dark:bg-white/10 border border-gray-200 dark:border-white/10 px-7 py-3 flex items-center gap-2 rounded-full text-sm font-semibold text-gray-700 dark:text-white/80 outline-none focus:scale-110 hover:scale-105 active:scale-100 transition-all shadow-sm hover:border-gray-300 dark:hover:border-white/20"
-          href="/CV.pdf"
-          download
+          href="/Yasser_Fetouhi_CV_General.pdf"
+          download="Yasser_Fetouhi_CV.pdf"
         >
           {t.downloadCv}
           <HiDownload className="opacity-60 group-hover:translate-y-0.5 transition-transform" />
